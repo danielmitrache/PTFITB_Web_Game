@@ -23,7 +23,11 @@
 
 ## Technologies Used
 - Python and Pygame library - for writing the actual game
-- WebAssembly and Pygbag - for making the game web compatible 
+- WebAssembly and Pygbag - for making the game web compatible
+- Object-Oriented Programming (OOP) - for organizing and structuring code efficiently
+- Git and GitHub - for version control and collaboration
+- HTML - for web interface design and layout
+- Testing and Debugging - using techniques such as unit testing to ensure code quality
 
 ## How the difficulty works
 The four things that can kill you are:
