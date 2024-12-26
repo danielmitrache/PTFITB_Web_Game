@@ -3,7 +3,7 @@
 <h2><b>PLAY THE GAME HERE: https://danielmitrache.github.io/PTFITB/</b></h2>
 
 ## Overview
-"Put the Fries in the Bag!" is a Web Python-based game (compiled to WebAssembly) where the player navigates a character to collect fries and place them in a bag while avoiding obstacles.
+"Put the Fries in the Bag!" is a Web Python-based game (compiled to WebAssembly) where the player navigates a character to collect fries and place them in a bag while avoiding obstacles. The game is a parody of the computer science student life jokes. While being a parody game, it features fun and balanced gameplay, well thought-out design and endless replayabilty, making it the perfect time killer.
 
 ## Features
 - **Player Movement**: Move the player using the `W`, `A`, `S`, `D` keys
@@ -55,3 +55,4 @@ The four things that can kill you are:
 git clone <repository-url> # Change the repository-url with the actual URL
 cd <project-directory>
 pip install -r requirements.txt
+ ```
