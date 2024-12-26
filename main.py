@@ -124,6 +124,22 @@ class Player:
     def draw(self, win):
         win.blit(self.image, (self.rect.x, self.rect.y))
 
+    def get_furthest_wall(self):
+        wall_midpoints = {
+            'left': (0, HEIGHT // 2),
+            'right': (WIDTH, HEIGHT // 2),
+            'up': (WIDTH // 2, 0),
+            'down': (WIDTH // 2, HEIGHT)
+        }
+        max_dist, furthest_wall = -1, None
+        for wall in wall_midpoints:
+            dist = ((self.rect.x - wall_midpoints[wall][0])**2 + (self.rect.y - wall_midpoints[wall][1])**2)**0.5
+            if dist > max_dist:
+                max_dist = dist
+                furthest_wall = wall
+
+        return furthest_wall
+
 class GirlEnemy:
     def __init__(self, x, y, width=GIRL_ENEMY_WIDTH, height=GIRL_ENEMY_HEIGHT, vel=1):
         self.rect = py.Rect(x, y, width, height)
@@ -249,8 +265,7 @@ class Deodorant:
             self.rect.x += self.speed
 
     @classmethod
-    def launch_random(cls, player):
-        orientation = random.choice(['up', 'down', 'left', 'right'])
+    def launch_by_orientation(cls, player, orientation):
         x, y = 0, 0
         match orientation:
             case 'up':
@@ -404,7 +419,17 @@ async def main():
                 run = False
                 break
             elif event.type == DEODORANT_LAUNCH_EVENT and not game_paused:
-                deodorant = Deodorant.launch_random(player)
+                best_orientation = player.get_furthest_wall()
+                match best_orientation:
+                    case 'up':
+                        best_orientation = 'down'
+                    case 'down':
+                        best_orientation = 'up'
+                    case 'left':
+                        best_orientation = 'right'
+                    case 'right':
+                        best_orientation = 'left'
+                deodorant = Deodorant.launch_by_orientation(player, best_orientation)
                 deodorant.set_speed(deodorant_speed)
                 launch_deodorant = True
             elif event.type == py.KEYDOWN and event.key == py.K_ESCAPE:
@@ -456,7 +481,9 @@ async def main():
             sound_effects['complete-level'].play()
             py.time.set_timer(MUTE_COMPLETE_LEVEL_SFX, 1)
             py.time.set_timer(FIX_LVL_COMPLETE_SFX, 500)
+
             score += 1
+
             if score == 1:
                 py.time.set_timer(DEODORANT_LAUNCH_EVENT, deodorant_launch_event_speed)
             bg_saturation = min(0.8, bg_saturation + 0.02)
@@ -468,6 +495,7 @@ async def main():
             if score % 20 == 0:
                 global girl_vel
                 girl_vel = min(2, girl_vel + 1)
+
             high_score = max(score, high_score)
             timer_start = py.time.get_ticks()
             player_can_pass = False
