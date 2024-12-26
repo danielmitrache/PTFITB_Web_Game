@@ -28,6 +28,7 @@
 - Git and GitHub - for version control and collaboration
 - HTML - for web interface design and layout
 - Testing and Debugging - using techniques such as unit testing to ensure code quality
+- Data Structures and Algorithms - for validating new levels
 
 ## How the difficulty works
 The four things that can kill you are:
