@@ -11,7 +11,7 @@
 - **Timer**: A countdown timer that stops when the game is paused and also alerts the player when low on time
 - **Obstacles**: Avoid walls, shower obstacles, deodorant projectiles and girls chasing you
 - **Collectibles**: Collect fries and place them in the bag to score points
-- **Random Level Generation**: Infinite levels randomly generated validated by a BFS algorithm
+- **Random Level Generation**: Infinite levels randomly generated validated by a BFS path-finding algorithm
 - **Difficulty Levels**: The game becomes more challenging as you score more points
 - **High Score**: Keep track of your high score
 - **Game Over Screen**: Displays the score and high score with options to restart or exit
@@ -43,6 +43,7 @@ The four things that can kill you are:
     </ol>
   </li>
 </ol>
+<h3> <b>The game remains balanced by keeping track of certain distances to make sure the player does not face situations impossible to escape</b> </h3>
 
 ## Installation
 ```bash
